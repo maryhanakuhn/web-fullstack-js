@@ -15,6 +15,7 @@
 - Helmet
 - Supertest
 - Dotenv
+- Bcryptjs
 
 ###
 - Base de programação web fullstack com JavaScript (frontend + backend)

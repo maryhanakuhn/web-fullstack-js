@@ -7,7 +7,7 @@ const accounts: IAccount[] = [];
 
 async function getAccounts(req: Request, res: Response, next: any) {
   //com findall traz tudo o que está na tabela de account
-  const accounts = await repository.findAll();
+  const accounts : IAccount[] = await repository.findAll();
 
   //ajuste de segurança
 

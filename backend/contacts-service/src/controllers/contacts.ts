@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
+import repository from "../models/contactRepository"
 
 async function getContacts(req: Request, res: Response, next: any) {
-  res.json([]);
+  repository.findAll()
 }
 
 export default {getContacts}

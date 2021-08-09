@@ -5,10 +5,14 @@ import repository from "../src/models/accountRepository";
 
 import { beforeAll, afterAll, describe, it, expect } from "@jest/globals";
 import { IAccount } from "../src/models/account";
+import auth from "../src/auth";
 
 const testEmail = "jest@accounts.auth.com";
-const hashPassword = "$2a$10$L4gpdyrwHtl40LYlTZzb/OINaV4cCuoMWqw/tCXB44n95/PCoQGAu"; //123456
+const hashPassword =
+  "$2a$10$L4gpdyrwHtl40LYlTZzb/OINaV4cCuoMWqw/tCXB44n95/PCoQGAu"; //123456
 const testPassword = "123456";
+let jwt = "";
+let testAccountId = 0;
 
 beforeAll(async () => {
   const testAccount: IAccount = {
@@ -17,7 +21,9 @@ beforeAll(async () => {
     password: hashPassword,
     domain: "jest.com",
   };
-  await repository.add(testAccount);
+  const result = await repository.add(testAccount);
+  testAccountId = result.id;
+  jwt = auth.sign(testAccountId)
 });
 
 afterAll(async () => {
@@ -61,7 +67,9 @@ describe("Testando rotas de autenticação", () => {
   });
 
   it("POST /accounts/logout - 200 - OK", async () => {
-    const resultado = await request(app).post("/accounts/logout");
+    const resultado = await request(app)
+      .post("/accounts/logout")
+      .set("x-access-token", jwt);
 
     expect(resultado.status).toEqual(200);
   });

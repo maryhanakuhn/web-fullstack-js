@@ -1,9 +1,13 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import fs from "fs";
-import authCommons, {Token} from "ms-commons/api/auth"
+import authCommons, { Token } from "ms-commons/api/auth";
+import path from "path";
 
-const privateKey = fs.readFileSync("./keys/private.key", "utf8");
+const privateKey = fs.readFileSync(
+  path.resolve(__dirname, "../keys/private.key"),
+  "utf8"
+);
 const jwtExpires = parseInt(`${process.env.JWT_EXPIRES}`);
 const jwtAlgorithm = "RS256";
 
@@ -25,7 +29,7 @@ function sign(accountId: number) {
 }
 
 async function verify(token: string) {
-  return authCommons.verify(token)
+  return authCommons.verify(token);
 }
 
 export default { hashPassword, comparePassword, sign, verify };

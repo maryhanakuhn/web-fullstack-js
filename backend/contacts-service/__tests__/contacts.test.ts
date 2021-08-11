@@ -38,9 +38,17 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  await repository.removeByEmail(testEmail, testAccountId);
-  await request(accountsApp).delete("/accounts/" + testAccountId).set("x-access-token", jwt);
-  await request(accountsApp).post("/accounts/logout").set("x-access-token", jwt);
+  const removeResult = await repository.removeByEmail(testEmail, testAccountId);
+  const removeResult2 = await repository.removeByEmail(
+    testEmail2,
+    testAccountId
+  );
+  const deleteResponse = await request(accountsApp)
+    .delete("/accounts/" + testAccountId)
+    .set("x-access-token", jwt);
+  const logoutResponse = await request(accountsApp)
+    .post("/accounts/logout")
+    .set("x-access-token", jwt);
 });
 
 describe("Testando rotas do contacts", () => {
@@ -85,9 +93,138 @@ describe("Testando rotas do contacts", () => {
   });
 
   it("GET /contacts/:id - Deve retornar statusCode 401", async () => {
-    const resultado = await request(app)
-    .get("/contacts/" + testContactId)
+    const resultado = await request(app).get("/contacts/" + testContactId);
 
     expect(resultado.status).toEqual(401);
+  });
+
+  //Criação de registro de contato vinculado a uma conta com sucesso
+  it("POST /contacts/ - Deve retornar statusCode 201", async () => {
+    const testContact = {
+      name: "Jest2",
+      email: testEmail2,
+      phone: "22999626792",
+    } as IContact;
+
+    const resultado = await request(app)
+      .post("/contacts/")
+      .set("x-access-token", jwt)
+      .send(testContact);
+
+    expect(resultado.status).toEqual(201);
+    expect(resultado.body.id).toBeTruthy();
+  });
+
+  //Erro quando é passado um objeto inválido ao criar um contato
+  it("POST /contacts/ - Deve retornar statusCode 422", async () => {
+    const payload = {
+      street: "Rua Teste",
+    };
+
+    const resultado = await request(app)
+      .post("/contacts/")
+      .set("x-access-token", jwt)
+      .send(payload);
+
+    expect(resultado.status).toEqual(422);
+  });
+
+  //Erro quando tenta criar contato sem estar logado ou com token inválido
+  it("POST /contacts/ - Deve retornar statusCode 401", async () => {
+    const testContact = {
+      name: "Jest2",
+      email: testEmail2,
+      phone: "22999626792",
+    } as IContact;
+
+    const resultado = await request(app).post("/contacts/").send(testContact);
+
+    expect(resultado.status).toEqual(401);
+  });
+
+  //Erro ao verificar os indexes. Não pode ter o email repetido para o mesmo accountId
+  it("POST /contacts/ - Deve retornar statusCode 400", async () => {
+    const testContact = {
+      name: "Jest3",
+      email: testEmail,
+      phone: "22999626792",
+    } as IContact;
+
+    const resultado = await request(app)
+      .post("/contacts/")
+      .set("x-access-token", jwt)
+      .send(testContact);
+
+    expect(resultado.status).toEqual(400);
+  });
+
+  //Contato alterado com sucesso
+  it("PATCH /contacts/:id - Deve retornar statusCode 200", async () => {
+    const payload = {
+      name: "Maryhana",
+    };
+
+    const resultado = await request(app)
+      .patch("/contacts/" + testContactId)
+      .set("x-access-token", jwt)
+      .send(payload);
+      
+    expect(resultado.status).toEqual(200);
+    expect(resultado.body.name).toEqual("Maryhana");
+  });
+
+  //Erro ao alterar contato sem token
+  it("PATCH /contacts/:id - Deve retornar statusCode 401", async () => {
+    const payload = {
+      name: "Maryhana",
+    };
+
+    const resultado = await request(app)
+      .patch("/contacts/" + testContactId)
+      .send(payload);
+
+    expect(resultado.status).toEqual(401);
+  });
+
+  //Erro ao alterar contato mandando objeto inválido
+  it("PATCH /contacts/:id - Deve retornar statusCode 422", async () => {
+    const payload = {
+      street: "Rua Teste",
+    };
+
+    const resultado = await request(app)
+      .patch("/contacts/" + testContactId)
+      .set("x-access-token", jwt)
+      .send(payload);
+
+    expect(resultado.status).toEqual(422);
+  });
+
+  //Erro ao alterar passando um id de contato inválido
+  it("PATCH /contacts/:id - Deve retornar statusCode 404", async () => {
+    const payload = {
+      name: "Maryhana",
+    };
+
+    const resultado = await request(app)
+      .patch("/contacts/-1")
+      .set("x-access-token", jwt)
+      .send(payload);
+
+    expect(resultado.status).toEqual(404);
+  });
+
+  //Erro quando é passado um parâmetro num formato inválido
+  it("PATCH /contacts/:id - Deve retornar statusCode 400", async () => {
+    const payload = {
+      name: "Maryhana",
+    };
+
+    const resultado = await request(app)
+      .patch("/contacts/abc")
+      .set("x-access-token", jwt)
+      .send(payload);
+
+    expect(resultado.status).toEqual(400);
   });
 });

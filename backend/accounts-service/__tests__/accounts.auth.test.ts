@@ -22,7 +22,7 @@ beforeAll(async () => {
     domain: "jest.com",
   };
   const result = await repository.add(testAccount);
-  testAccountId = result.id;
+  testAccountId = result.id!;
   jwt = auth.sign(testAccountId)
 });
 

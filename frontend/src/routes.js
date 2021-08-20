@@ -8,6 +8,8 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 
+import Signin from "../src/pages/public/SignIn"
+
 function Home() {
   return (
     <div>
@@ -55,14 +57,7 @@ function Contact() {
   );
 }
 
-function Signin() {
-  return (
-    <div>
-      <Menu />
-      <h2>Login</h2>
-    </div>
-  );
-}
+
 
 function Signup() {
   return (

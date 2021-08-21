@@ -1,4 +1,4 @@
-## Curso Web FullStack JS
+## Curso Web FullStack JS - Luiz Tools
 
 ### Tecnologias utilizadas:
 - Node.js
@@ -18,7 +18,7 @@
 - Dotenv
 - Bcryptjs
 
-###
+### Desenvolvimento
 - Base de programação web fullstack com JavaScript (frontend + backend)
 - Construção de frontend para Single Page Application (SPA) usando ReactJS.
 - Construção do backend através de Web APIs RESTful seguras com Node.js.
@@ -37,6 +37,7 @@
 - Experiências práticas e conhecimento acumulado dos professores e demais alunos.
 - Introdução ao conceito de monorepo.
 
+### Curso Web FullStack JS - Luiz Tools
 Aplicação desenvolvida no Curso Web FullStack JS - https://www.luiztools.com.br/curso-fullstack
 - [Luiz Duarte](https://github.com/luiztools/) 
 - [Daniel Castro](https://github.com/danielcsrs)

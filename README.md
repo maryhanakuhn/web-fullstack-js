@@ -6,6 +6,7 @@
 - MySQL
 - Sequelize
 - TypeScript
+- Bootstrap
 
 ### Bibliotecas utilizadas:
 - JWT
@@ -22,12 +23,12 @@
 - Construção de frontend para Single Page Application (SPA) usando ReactJS.
 - Construção do backend através de Web APIs RESTful seguras com Node.js.
 - Persistência de dados com MySQL e Sequelize (ORM).
-- Boas práticas de programação com ExpressJS, TypeScript e muitos testes.
+- Boas práticas de programação com ExpressJS, TypeScript e testes.
 - Autenticação de serviços com JSON Web Token (JWT) de chave simétrica e assimétrica.
-- Aprenda a usar React Bootstrap para construir telas elegantes e profissionais de maneira simples.
+- Utilização de React Bootstrap para construir telas elegantes e profissionais de maneira simples.
 - Arquitetura MVC, filas, serverless, micro serviços e mais conceitos na prática.
 - Desenvolvimento orientado a testes (TDD) com Jest e Supertest.
-- Os principais serviços disponíveis na AWS como Lightsail, S3, SQS, Lambda e mais.
+- Principais serviços disponíveis na AWS como Lightsail, S3, SQS, Lambda e mais.
 - Publicação do projeto do curso em infraestrutura na Amazon AWS.
 - Construção de um Software como Serviço (SaaS) multi-tenant que pode ser usado por múltiplos usuários com segurança.
 - Como fazer um projeto do início ao fim que resolve um problema real e pode ser comercializado.
@@ -35,3 +36,7 @@
 - Arquitetura de micro serviços + filas + serverless para atender a escala.
 - Experiências práticas e conhecimento acumulado dos professores e demais alunos.
 - Introdução ao conceito de monorepo.
+
+Aplicação desenvolvida no Curso Web FullStack JS - https://www.luiztools.com.br/curso-fullstack
+- [Luiz Duarte](https://github.com/luiztools/) 
+- [Daniel Castro](https://github.com/danielcsrs)

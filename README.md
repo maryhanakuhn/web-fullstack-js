@@ -17,6 +17,8 @@
 - Supertest
 - Dotenv
 - Bcryptjs
+- Axios
+- Cors
 
 ### Desenvolvimento
 - Base de programação web fullstack com JavaScript (frontend + backend)

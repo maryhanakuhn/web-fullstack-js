@@ -13,7 +13,7 @@ import {
 import { Link, withRouter } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
 import { BoxForm, BoxContent } from "../../../shared/styles";
-import api from "../../../services/api";
+import AccountsServices from "../../../services/accounts";
 
 class SignUp extends React.Component {
   state = {
@@ -28,17 +28,13 @@ class SignUp extends React.Component {
   handleSignUp = async (event) => {
     event.preventDefault();
     const { name, email, password, domain, isLoading } = this.state;
-   
+
     if (!name || !email || !domain || !password) {
       this.setState({ error: "Informe todos os campos para de cadastrar!" });
     } else {
       try {
-        await api.post("accounts", {
-          name,
-          email,
-          password,
-          domain,
-        });
+        const service = new AccountsServices();
+        await service.signup({ name, email, password, domain });
         //se der certo redireciona pra essa tela
         this.props.history.push("/signin");
       } catch (error) {

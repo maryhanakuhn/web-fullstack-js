@@ -3,7 +3,7 @@ import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import Logo from "../../../assets/logo.png";
 import { BoxForm, BoxContent } from "../../../shared/styles";
 import { Link, withRouter } from "react-router-dom";
-import api from "../../../services/api";
+import AccountsServices from "../../../services/accounts";
 import { login } from "../../../services/auth";
 
 class SignIn extends React.Component {
@@ -20,10 +20,9 @@ class SignIn extends React.Component {
       this.setState({ error: "Informe todos os campos para acessar!" });
     } else {
       try {
-        const response = await api.post("accounts/login", {
-          email,
-          password,
-        });
+        const service = new AccountsServices();
+
+        const response = await service.login( email, password );
         login(response.data.token);
         //se der certo redireciona pra essa tela
         this.props.history.push("/");

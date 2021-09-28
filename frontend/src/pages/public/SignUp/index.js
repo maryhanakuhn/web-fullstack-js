@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import Logo from "../../../assets/logo.png";
-import { BoxContent, BoxForm } from "./styles";
+import { BoxForm, BoxContent } from "../../../shared/styles";
 import api from "../../../services/api";
 
 class SignUp extends React.Component {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import Logo from "../../../assets/logo.png";
-import { BoxForm, BoxContent } from "./styles";
+import { BoxForm, BoxContent } from "../../../shared/styles";
 import { Link, withRouter } from "react-router-dom";
 import api from "../../../services/api";
 import { login } from "../../../services/auth";

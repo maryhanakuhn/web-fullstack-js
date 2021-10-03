@@ -26,7 +26,7 @@ export default database.define<IAccountModel>("account", {
     unique: true,
   },
   password: {
-    type: Sequelize.STRING(50),
+    type: Sequelize.STRING(150),
     allowNull: false,
   },
   status: {
